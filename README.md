@@ -22,7 +22,32 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+To parse phone numbers without an area code:
+
+```ruby
+PhoneParser.parse('555-555-5555') # => '5555555555'
+PhoneParser.parse('5555555555') # => '5555555555'
+PhoneParser.parse('(555) 555-5555') # => '5555555555'
+PhoneParser.parse('555.555.5555') # => '5555555555'
+PhoneParser.parse('555 555.5555') # => '5555555555'
+PhoneParser.parse('555 555.5555') # => '5555555555'
+```
+
+It will throw an error if an invalid phone number is passed to the parser:
+
+```ruby
+PhoneParser.parse('5555555') # => PhoneLengthError
+PhoneParser.parse('') # => PhoneLengthError
+```
+
+If a country code is supplied, the parser will verify that the code is valid, it will throw a `CountryCodeError` if the country code isn't valid:
+
+```ruby
+PhoneParser.parse('+15555555555') # => '15555555555'
+PhoneParser.parse('1-7845555555555') # => '17845555555555'
+PhoneParser.parse('Country Code: 379, Phone:  555-555-5555') # => '3795555555555'
+PhoneParser.parse('999 555 555 5555') # => CountryCodeError
+```
 
 ## Development
 
