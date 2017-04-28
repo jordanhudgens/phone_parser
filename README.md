@@ -46,6 +46,7 @@ If a country code is supplied, the parser will verify that the code is valid, it
 PhoneParser.parse('+15555555555') # => '15555555555'
 PhoneParser.parse('1-7845555555555') # => '17845555555555'
 PhoneParser.parse('Country Code: 379, Phone:  555-555-5555') # => '3795555555555'
+PhoneParser.parse('3795555555555') # => '3795555555555'
 PhoneParser.parse('999 555 555 5555') # => CountryCodeError
 ```
 
