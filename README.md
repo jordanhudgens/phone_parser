@@ -22,15 +22,15 @@ Or install it yourself as:
 
 ## Usage
 
-To parse phone numbers without an area code:
+To parse phone numbers without a country code, a default country code of `1` is assumed:
 
 ```ruby
-PhoneParser.parse('555-555-5555') # => '5555555555'
-PhoneParser.parse('5555555555') # => '5555555555'
-PhoneParser.parse('(555) 555-5555') # => '5555555555'
-PhoneParser.parse('555.555.5555') # => '5555555555'
-PhoneParser.parse('555 555.5555') # => '5555555555'
-PhoneParser.parse('555 555.5555') # => '5555555555'
+PhoneParser.parse('555-555-5555')   # => '15555555555'
+PhoneParser.parse('5555555555')     # => '15555555555'
+PhoneParser.parse('(555) 555-5555') # => '15555555555'
+PhoneParser.parse('555.555.5555')   # => '15555555555'
+PhoneParser.parse('555 555.5555')   # => '15555555555'
+PhoneParser.parse('555 555.5555')   # => '15555555555'
 ```
 
 It will throw an error if an invalid phone number is passed to the parser:
@@ -48,6 +48,12 @@ PhoneParser.parse('1-7845555555555') # => '17845555555555'
 PhoneParser.parse('Country Code: 379, Phone:  555-555-5555') # => '3795555555555'
 PhoneParser.parse('3795555555555') # => '3795555555555'
 PhoneParser.parse('999 555 555 5555') # => CountryCodeError
+```
+
+If you want to supply a different default country code, you can pass in an optional argument, this will not override country codes found in the provided number, it will only be used if a country code is not found.
+
+```ruby
+PhoneParser.parse('5555555555', country_code: '379') # => '3795555555555'
 ```
 
 ## Development
