@@ -35,17 +35,17 @@ It will throw an error if an invalid phone number is passed to the parser:
 
 ```ruby
 PhoneParser.parse('5555555') # => PhoneLengthError
-PhoneParser.parse('') # => PhoneLengthError
+PhoneParser.parse('')        # => PhoneLengthError
 ```
 
 If a country code is supplied, the parser will verify that the code is valid, it will throw a `CountryCodeError` if the country code isn't valid:
 
 ```ruby
-PhoneParser.parse('+15555555555') # => '15555555555'
-PhoneParser.parse('1-7845555555555') # => '17845555555555'
+PhoneParser.parse('+15555555555')                            # => '15555555555'
+PhoneParser.parse('1-7845555555555')                         # => '17845555555555'
 PhoneParser.parse('Country Code: 379, Phone:  555-555-5555') # => '3795555555555'
-PhoneParser.parse('3795555555555') # => '3795555555555'
-PhoneParser.parse('999 555 555 5555') # => CountryCodeError
+PhoneParser.parse('3795555555555')                           # => '3795555555555'
+PhoneParser.parse('999 555 555 5555')                        # => CountryCodeError
 ```
 
 If you want to supply a different default country code, you can pass in an optional argument, this will not override country codes found in the provided number, it will only be used if a country code is not found.
