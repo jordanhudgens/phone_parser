@@ -32,4 +32,14 @@ describe PhoneParser do
   it 'raises an error if an invalid country code is supplied' do
     expect{ PhoneParser.parse('999 555 555 5555') }.to raise_error(CountryCodeError)
   end
+
+  it 'can verify if a phone number belongs to a specific country' do
+    expect(CountryCodes.va?('379 555-555-5555')).to eq(true)
+    expect(CountryCodes.us?('379 555-555-5555')).to eq(false)
+  end
+
+  it 'returns the country code' do
+    expect(CountryCodes.country_code('379 555-555-5555')).to eq('379')
+    expect(CountryCodes.country_code('1 555-555-5555')).to eq('1')
+  end
 end

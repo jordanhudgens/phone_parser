@@ -1,4 +1,4 @@
-module CountryCodes
+class CountryCodes
   def self.code_array
     [
       ["93", "AF"],
@@ -245,5 +245,49 @@ module CountryCodes
       ["260", "ZM"],
       ["263", "ZW"]
     ]
+  end
+
+  def self.country_code_validator number, country_code
+    if number.length == 10
+      country_code + number
+    else
+      extracted_number = number[-10..-1]
+      country_code = number.gsub(extracted_number, '')
+
+      country_codes.include?(country_code) ? (number) : (raise CountryCodeError)
+    end
+  end
+
+  def self.country_codes
+    code_array.flatten.keep_if { |e| e =~ /\d+/ }
+  end
+
+  def self.country_code number
+    number.delete!("^0-9")
+    country_code_validator(number, nil)
+    extracted_number = number[-10..-1]
+    country_code = number.gsub(extracted_number, '')
+  end
+
+  def self.method_missing(method_name, *arguments, &block)
+    if method_name.to_s =~ /(.*)?/
+      if code_array.map(&:last).index(method_name.to_s[0..-2].upcase) == code_array.map(&:first).index(country_code(arguments.first))
+        true
+      else
+        false
+      end
+    else
+      super
+    end
+  end
+
+  def self.respond_to_missing?(method_name, include_private = false)
+    method_name.to_s.end_with?('?') || super
+  end
+end
+
+class CountryCodeError < StandardError
+  def message
+    'Country code not recognized'
   end
 end
