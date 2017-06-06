@@ -57,8 +57,8 @@ PhoneParser.parse('5555555555', country_code: '379') # => '3795555555555'
 You can also check to see if a phone number is from a specific country using it's country code abbreviation, as shown below:
 
 ```ruby
-CountryCodes.va?('379 555-555-5555') => true
-CountryCodes.us?('379 555-555-5555') => false
+CountryCodes.va?('379 555-555-5555') # => true
+CountryCodes.us?('379 555-555-5555') # => false
 ```
 
 Alternatively, if you want to extract the country code, you can query it directly from the phone number:
