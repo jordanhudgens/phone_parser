@@ -54,6 +54,21 @@ If you want to supply a different default country code, you can pass in an optio
 PhoneParser.parse('5555555555', country_code: '379') # => '3795555555555'
 ```
 
+You can also check to see if a phone number is from a specific country using it's country code abbreviation, as shown below:
+
+```ruby
+CountryCodes.va?('379 555-555-5555') => true
+CountryCodes.us?('379 555-555-5555') => false
+```
+
+Alternatively, if you want to extract the country code, you can query it directly from the phone number:
+
+```ruby
+CountryCodes.country_code('379 555-555-5555') # => '379'
+CountryCodes.country_code('1 555-555-5555')   # => '1'
+```
+
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
